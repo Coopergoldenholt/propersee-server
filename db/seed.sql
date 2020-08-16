@@ -41,6 +41,7 @@ CREATE TABLE "forms" (
   "image_one" text,
   "image_two" text,
   "image_three" text,
+  "image_four" text
 );
 
 ALTER TABLE "users" ADD FOREIGN KEY ("company_id") REFERENCES "companies" ("id");
@@ -59,3 +60,4 @@ ALTER TABLE "forms" ADD FOREIGN KEY ("property_id") REFERENCES "properties" ("id
 ALTER TABLE "forms" ADD FOREIGN KEY ("related_form_id") REFERENCES "forms" ("id");
 
 ALTER TABLE "forms" ADD FOREIGN KEY ("managed_company_id") REFERENCES "managed_companies" ("id");
+
