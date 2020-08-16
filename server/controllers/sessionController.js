@@ -66,14 +66,7 @@ module.exports = {
 		// 	<p>You have been added to Matiencsee. Download the app and register with this email, and you will be able to view your properties.<br/></p>`,
 		// });
 
-		req.session.user = {
-			email: user.email,
-			loggedIn: true,
-			company: user.company,
-			user: user.type_of_user,
-			id: user.id,
-		};
-		res.status(200).send(req.session.user);
+		res.status(200).send("User Created");
 	},
 	setUserPassword: async (req, res) => {
 		const db = req.app.get("db");
@@ -88,6 +81,7 @@ module.exports = {
 		const [user] = await db.register.set_user_password([email, hash]);
 
 		req.session.user = {
+			name: user.name,
 			email: user.email,
 			loggedIn: true,
 			companyId: user.company_id,

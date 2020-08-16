@@ -32,7 +32,7 @@ CREATE TABLE "forms" (
   "property_id" int,
   "managed_company_id" int,
   "date" timestamp,
-  "employee_id" int,
+ "employee_name" varchar(100),
   "summary" varchar(200),
   "title" varchar(20),
   "type_of_form" varchar(50),
@@ -55,7 +55,6 @@ ALTER TABLE "forms" ADD FOREIGN KEY ("company_id") REFERENCES "companies" ("id")
 
 ALTER TABLE "forms" ADD FOREIGN KEY ("property_id") REFERENCES "properties" ("id");
 
-ALTER TABLE "forms" ADD FOREIGN KEY ("employee_id") REFERENCES "users" ("id");
 
 ALTER TABLE "forms" ADD FOREIGN KEY ("related_form_id") REFERENCES "forms" ("id");
 
