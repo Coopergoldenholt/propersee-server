@@ -26,12 +26,12 @@ module.exports = {
 			imageTwo,
 			imageThree,
 			imageFour,
-			req.session.user.id,
 			summary,
 			title,
 			typeOfRequest,
 			null,
 			false,
+			req.session.user.name,
 		]);
 
 		res.status(200).send("request created");

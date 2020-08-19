@@ -25,6 +25,7 @@ app.post("/api/login", userCtrl.loginUser);
 app.post("/api/register", userCtrl.registerUser);
 app.post("/api/signup", userCtrl.setUserPassword);
 app.get("/api/companies/:id", companyCtrl.getManagedCompanies);
+app.post("/api/user/logout", userCtrl.logoutUser);
 
 //Admin Calls
 app.get("/api/company/users", companyCtrl.getUsers);
@@ -32,6 +33,8 @@ app.get("/api/company/employees", companyCtrl.getEmployees);
 app.get("/api/company/properties", companyCtrl.getAdminProperties);
 app.post("/api/company/properties", companyCtrl.addProperty);
 app.post("/api/company/managing-company", companyCtrl.addManagedCompany);
+app.put("/api/user/delete/:id", userCtrl.deleteUser);
+app.put("/api/company/property/delete/:companyId", companyCtrl.deleteProperty);
 
 //Form Calls
 app.post("/api/company/photo", formCtrl.saveRequestForm);

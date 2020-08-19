@@ -57,14 +57,15 @@ module.exports = {
 			managedCompany,
 			name,
 		]);
-		// transporter.sendMail({
-		// 	from: "coopergoldenholt@outlook.com", // sender address
-		// 	to: user.email, // list of receivers
-		// 	subject: "You Have Been Invited To Register", // Subject line
-		// 	html: `<p><b>Hello</b> to myself </p>
-		// 	<p>You have been added to Matiencsee. Download the app and register with this email, and you will be able to view your properties.<br/></p>`,
-		// });
 
 		res.status(200).send("Created");
+	},
+	deleteProperty: async (req, res) => {
+		const db = req.app.get("db");
+		let { companyId } = req.params;
+
+		const deleted = await db.properties.delete_property([companyId]);
+
+		res.status(200).send("Deleted");
 	},
 };
