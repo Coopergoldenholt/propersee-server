@@ -12,10 +12,12 @@ module.exports = {
 			propertyId,
 			title,
 			typeOfRequest,
+			projectId,
 		} = req.body;
 		const date = `${new Date().getFullYear()}-${
 			new Date().getMonth() + 1
 		}-${new Date().getDate()} ${new Date().getHours()}:${new Date().getMinutes()}`;
+		console.log("here");
 
 		const properties = await db.form.insert_request_form([
 			req.session.user.companyId,
@@ -32,6 +34,7 @@ module.exports = {
 			null,
 			false,
 			req.session.user.name,
+			projectId,
 		]);
 
 		res.status(200).send("request created");

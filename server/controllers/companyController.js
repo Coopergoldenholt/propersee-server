@@ -65,7 +65,21 @@ module.exports = {
 		let { companyId } = req.params;
 
 		const deleted = await db.properties.delete_property([companyId]);
-
 		res.status(200).send("Deleted");
+	},
+	deleteCompany: async (req, res) => {
+		const db = req.app.get("db");
+		let { companyId } = req.params;
+
+		const deleted = await db.companies.delete_managing_company([companyId]);
+		res.status(200).send("Deleted");
+	},
+	getPropertiesByMangagedCompany: async (req, res) => {
+		const db = req.app.get("db");
+		const { id } = req.params;
+		const properties = await db.properties.get_properties_by_managed_company(
+			id
+		);
+		res.status(200).send(properties);
 	},
 };

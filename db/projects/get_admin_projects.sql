@@ -1,0 +1,1 @@
+select * from projects where company_id = $1;

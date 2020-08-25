@@ -7,6 +7,7 @@ const userCtrl = require("./controllers/sessionController");
 const companyCtrl = require("./controllers/companyController");
 const formCtrl = require("./controllers/formController");
 const customerCtrl = require("./controllers/customerController");
+const projectCtrl = require("./controllers/projectController");
 
 const app = express();
 
@@ -35,6 +36,13 @@ app.post("/api/company/properties", companyCtrl.addProperty);
 app.post("/api/company/managing-company", companyCtrl.addManagedCompany);
 app.put("/api/user/delete/:id", userCtrl.deleteUser);
 app.put("/api/company/property/delete/:companyId", companyCtrl.deleteProperty);
+app.put("/api/company/delete/:companyId", companyCtrl.deleteCompany);
+
+//Property Calls
+app.get(
+	"/api/company/managed-company/properties/:id",
+	companyCtrl.getPropertiesByMangagedCompany
+);
 
 //Form Calls
 app.post("/api/company/photo", formCtrl.saveRequestForm);
@@ -42,6 +50,13 @@ app.get("/api/company/property/:propertyId", formCtrl.getPropertyForms);
 
 //Employee Calls
 app.get("/api/user/properties", customerCtrl.getCustomerProperties);
+
+//Project Calls
+app.get("/api/projects", projectCtrl.getProjects);
+app.get("/api/project/:id", projectCtrl.getProject);
+app.post("/api/projects", projectCtrl.createProject);
+app.get("/api/project/forms/:id", projectCtrl.getProjectForms);
+app.put("/api/project/delete/:id", projectCtrl.deleteProject);
 
 massive({
 	connectionString: CONNECTION_STRING,
