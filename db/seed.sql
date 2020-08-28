@@ -49,7 +49,7 @@ CREATE TABLE "forms" (
   "property_id" int,
   "managed_company_id" int,
   "date" timestamp,
- "employee_name" varchar(100),
+ name varchar(100),
   "summary" varchar(200),
   "title" varchar(20),
   "type_of_form" varchar(50),
@@ -59,8 +59,7 @@ CREATE TABLE "forms" (
   "image_one" text,
   "image_two" text,
   "image_three" text,
-  "image_four" text,
-  name varchar(100)
+  "image_four" text
 );
 
 ALTER TABLE "users" ADD FOREIGN KEY ("company_id") REFERENCES "companies" ("id");

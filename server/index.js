@@ -29,8 +29,9 @@ app.get("/api/companies/:id", companyCtrl.getManagedCompanies);
 app.post("/api/user/logout", userCtrl.logoutUser);
 
 //Admin Calls
-app.get("/api/company/users", companyCtrl.getUsers);
+app.get("/api/company/customers", companyCtrl.getUsers);
 app.get("/api/company/employees", companyCtrl.getEmployees);
+app.get("/api/company/users", companyCtrl.getAllCompanyUsers);
 app.get("/api/company/properties", companyCtrl.getAdminProperties);
 app.post("/api/company/properties", companyCtrl.addProperty);
 app.post("/api/company/managing-company", companyCtrl.addManagedCompany);
@@ -55,7 +56,9 @@ app.get("/api/user/properties", customerCtrl.getCustomerProperties);
 app.get("/api/projects", projectCtrl.getProjects);
 app.get("/api/project/:id", projectCtrl.getProject);
 app.post("/api/projects", projectCtrl.createProject);
+app.post("/api/project/user", projectCtrl.addUserToProject);
 app.get("/api/project/forms/:id", projectCtrl.getProjectForms);
+app.get("/api/project/users/:id", projectCtrl.getUsersForProject);
 app.put("/api/project/delete/:id", projectCtrl.deleteProject);
 
 massive({

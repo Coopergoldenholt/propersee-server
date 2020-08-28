@@ -32,6 +32,14 @@ module.exports = {
 
 		res.status(200).send(users);
 	},
+	getAllCompanyUsers: async (req, res) => {
+		const db = req.app.get("db");
+		const users = await db.users.get_all_users_from_company(
+			req.session.user.companyId
+		);
+
+		res.status(200).send(users);
+	},
 	getAdminProperties: async (req, res) => {
 		const db = req.app.get("db");
 		const properties = await db.properties.get_all_admin_properties(

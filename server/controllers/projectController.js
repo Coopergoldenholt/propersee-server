@@ -31,6 +31,7 @@ module.exports = {
 	getProjectForms: async (req, res) => {
 		const db = req.app.get("db");
 		const { id } = req.params;
+
 		const forms = await db.projects.get_project_forms(id);
 
 		res.status(200).send(forms);
@@ -57,5 +58,28 @@ module.exports = {
 		const { id } = req.params;
 		await db.projects.delete_project(id);
 		res.status(200).send("Project Deleted");
+	},
+	getUsersForProject: async (req, res) => {
+		const db = req.app.get("db");
+		const { id } = req.params;
+
+		const users = await db.projects.get_project_users(id);
+
+		res.status(200).send(users);
+	},
+	addUserToProject: async (req, res) => {
+		const db = req.app.get("db");
+		const { userId, projectId } = req.body;
+		const userAttachedToProject = await db.projects.check_user_projects_for_existing_user(
+			[userId, projectId]
+		);
+
+		if (userAttachedToProject) {
+			res.status(401).send("User Already In Project");
+		} else {
+			await db.projects.add_user_to_project([userId, projectId]);
+
+			res.status(200).send("User Added");
+		}
 	},
 };
