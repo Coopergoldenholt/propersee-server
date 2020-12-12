@@ -15,7 +15,7 @@ module.exports = {
 				// const names = await db.projects.get_names_for_projects([]);
 				break;
 			default:
-				projects = "user";
+				projects = await db.projects.get_projects([req.session.user.id]);
 		}
 
 		res.status(200).send(projects);
@@ -70,9 +70,12 @@ module.exports = {
 	addUserToProject: async (req, res) => {
 		const db = req.app.get("db");
 		const { userId, projectId } = req.body;
-		const userAttachedToProject = await db.projects.check_user_projects_for_existing_user(
-			[userId, projectId]
-		);
+		const [
+			userAttachedToProject,
+		] = await db.projects.check_user_projects_for_existing_user([
+			userId,
+			projectId,
+		]);
 
 		if (userAttachedToProject) {
 			res.status(401).send("User Already In Project");

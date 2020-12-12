@@ -66,7 +66,7 @@ module.exports = {
 				to: user.email, // list of receivers
 				subject: "You Have Been Invited To Register", // Subject line
 				html: `<p><b>Hello</b>  </p>
-			<p>You have been invited to register an account with Propersee. Download the app off the app store and finish setting up your account today!</p>`,
+			<p>You have been invited to register an account with ProperT. Download the app off the app store and finish setting up your account today!</p>`,
 			});
 
 			res.status(200).send("User Created");
@@ -77,6 +77,7 @@ module.exports = {
 		let { email, password, name } = req.body;
 		email = email.toLowerCase();
 		const [existingUser] = await db.login.get_user_by_email(email);
+		console.log(existingUser);
 		if (!existingUser) {
 			return res.status(401).send("No Email Was Found");
 		} else if (existingUser.password !== null) {
