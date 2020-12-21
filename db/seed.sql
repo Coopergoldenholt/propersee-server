@@ -24,42 +24,45 @@ CREATE TABLE "properties" (
   "company_id" int,
   "managed_company_id" int,
   "name" varchar(200)
-  
 );
 
-CREATE TABLE "projects" (
+CREATE TABLE "groups"(
   "id" SERIAL PRIMARY KEY,
-  "company_id" int,
-  "managed_company_id" int,
-  "name" varchar(200),
-  "completed" boolean ,
-  "property_id" int,
-  "date" timestamp
-);
+  "name" varchar(100)
+)
 
-CREATE TABLE "user_projects" (
-    "id" SERIAL PRIMARY KEY,
-    "user_id" int,
-    "project_id" int
-);
+CREATE TABLE "group_properties"(
+  "id" SERIAL PRIMARY KEY,
+  "group_id" int,
+  "property_id" int
+)
+
+CREATE TABLE "property_auth"(
+  "id" SERIAL PRIMARY KEY,
+  "property_id" int,
+  "user_id" int,
+  "group_id" int
+)
+
 
 CREATE TABLE "forms" (
   "id" SERIAL PRIMARY KEY,
   "company_id" int,
   "property_id" int,
   "managed_company_id" int,
+  "type_of_work" text,
   "date" timestamp,
- name varchar(100),
-  "summary" varchar(200),
-  "title" varchar(20),
-  "type_of_form" varchar(50),
-  "related_form_id" int,
+ "name" varchar(100),
   "project_id" int,
   "completed" boolean,
   "image_one" text,
   "image_two" text,
   "image_three" text,
-  "image_four" text
+  "image_four" text,
+  "image_five" text,
+  "image_six" text,
+  "image_seven" text,
+  "image_eight" text
 );
 
 ALTER TABLE "users" ADD FOREIGN KEY ("company_id") REFERENCES "companies" ("id");
@@ -68,25 +71,21 @@ ALTER TABLE "properties" ADD FOREIGN KEY ("company_id") REFERENCES "companies" (
 
 ALTER TABLE "properties" ADD FOREIGN KEY ("managed_company_id") REFERENCES "managed_companies" ("id");
 
-ALTER TABLE "managed_companies" ADD FOREIGN KEY ("company_id") REFERENCES "companies" ("id");
+ALTER TABLE "managed_companies" ADD FOREIGN KEY ("managing_company_id") REFERENCES "companies" ("id");
 
-ALTER TABLE "projects" ADD FOREIGN KEY ("managed_company_id") REFERENCES "managed_companies" ("id");
+ALTER TABLE "group_properties" ADD FOREIGN KEY ("group_id") REFERENCES "groups" ("id");
 
-ALTER TABLE "projects" ADD FOREIGN KEY ("company_id") REFERENCES "companies" ("id");
+ALTER TABLE "group_properties" ADD FOREIGN KEY ("property_id") REFERENCES "properties" ("id");
 
-ALTER TABLE "projects" ADD FOREIGN KEY ("property_id") REFERENCES "properties" ("id");
+ALTER TABLE "property_auth" ADD FOREIGN KEY ("property_id") REFERENCES "properties" ("id");
 
-ALTER TABLE "user_projects" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
+ALTER TABLE "property_auth" ADD FOREIGN KEY ("user_id") REFERENCES "users" ("id");
 
-ALTER TABLE "user_projects" ADD FOREIGN KEY ("project_id") REFERENCES "projects" ("id");
+ALTER TABLE "property_auth" ADD FOREIGN KEY ("group_id") REFERENCES "groups" ("id");
 
 ALTER TABLE "forms" ADD FOREIGN KEY ("company_id") REFERENCES "companies" ("id");
 
 ALTER TABLE "forms" ADD FOREIGN KEY ("property_id") REFERENCES "properties" ("id");
 
-ALTER TABLE "forms" ADD FOREIGN KEY ("related_form_id") REFERENCES "forms" ("id");
-
 ALTER TABLE "forms" ADD FOREIGN KEY ("managed_company_id") REFERENCES "managed_companies" ("id");
-
-ALTER TABLE "forms" ADD FOREIGN KEY ("project_id") REFERENCES "projects" ("id");
 

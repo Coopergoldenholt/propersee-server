@@ -4,15 +4,16 @@ module.exports = {
 	saveRequestForm: async (req, res) => {
 		const db = req.app.get("db");
 		const {
+			typeOfWork,
 			imageOne,
 			imageTwo,
 			imageThree,
 			imageFour,
-			summary,
+			imageFive,
+			imageSix,
+			imageSeven,
+			imageEight,
 			propertyId,
-			title,
-			typeOfRequest,
-			projectId,
 		} = req.body;
 		const date = `${new Date().getFullYear()}-${
 			new Date().getMonth() + 1
@@ -23,17 +24,16 @@ module.exports = {
 			req.session.user.managedCompanyId,
 			propertyId,
 			date,
+			req.session.user.name,
+			typeOfWork,
 			imageOne,
 			imageTwo,
 			imageThree,
 			imageFour,
-			summary,
-			title,
-			typeOfRequest,
-			null,
-			false,
-			req.session.user.name,
-			projectId,
+			imageFive,
+			imageSix,
+			imageSeven,
+			imageEight,
 		]);
 
 		res.status(200).send("request created");
@@ -46,5 +46,13 @@ module.exports = {
 		const property = await db.properties.get_property_data([propertyId, page]);
 
 		res.status(200).send(property);
+	},
+	getAllCompanyForms: async (req, res) => {
+		const db = req.app.get("db");
+
+		const { page } = req.query;
+		const propertyList = await db.form.get_forms_by_managed_company([page]);
+
+		res.status(200).send(propertyList);
 	},
 };

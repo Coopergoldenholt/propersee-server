@@ -48,6 +48,7 @@ app.get(
 //Form Calls
 app.post("/api/company/photo", formCtrl.saveRequestForm);
 app.get("/api/company/property/:propertyId", formCtrl.getPropertyForms);
+app.get("/api/company/forms", formCtrl.getAllCompanyForms);
 
 //Employee Calls
 app.get("/api/user/properties", customerCtrl.getCustomerProperties);

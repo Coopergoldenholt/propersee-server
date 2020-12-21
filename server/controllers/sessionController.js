@@ -64,9 +64,10 @@ module.exports = {
 			transporter.sendMail({
 				from: "coopergoldenholt@outlook.com", // sender address
 				to: user.email, // list of receivers
-				subject: "You Have Been Invited To Register", // Subject line
+				subject:
+					"You Have Been Invited To Register For The Golden Landscaping App", // Subject line
 				html: `<p><b>Hello</b>  </p>
-			<p>You have been invited to register an account with ProperT. Download the app off the app store and finish setting up your account today!</p>`,
+			<p>You have been invited to register an account with the Golden Landscaping and Lawn App. Download the app off the app store and finish setting up your account with this email!</p>`,
 			});
 
 			res.status(200).send("User Created");
